@@ -26,3 +26,4 @@ curl -H "Accept-Encoding: gzip" -I localhost:8000
 
 # You can check the files through below command 
 kubectl exec $(kubectl get po -l app=configmap-vol-example -o jsonpath='{.items[*].metadata.name}') ls /etc/nginx/conf.d
+
