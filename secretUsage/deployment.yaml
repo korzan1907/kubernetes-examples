@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: secret-example-usage
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: secret-example-usage-app
+    spec:
+     containers:
+     - image: nginx:alpine
+       name: web-server
+       ports:
+       - containerPort: 80
+       - containerPort: 443
+       volumeMounts:
+         - name: html
+           mountPath: /usr/share/nginx/html
+           readOnly: true
+         - name: config
+           mountPath: /etc/nginx/conf.d
+           readOnly: true
+         - name: certs
+           mountPath: /etc/nginx/certs/
+           readOnly: true
+     volumes:
+     - name: html
+       emptyDir: {}
+     - name: config
+       configMap:
+         name: nginx-config
+         items:
+         - key: my-nginx-config.conf
+           path: https.conf
+     - name: certs
+       secret:
+         secretName: https-secret  

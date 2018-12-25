@@ -1,10 +1,7 @@
 #################################################################
-##
-##
 ## Ozan Güzeldereli
 ##
 ## Attaching ConfigMap as a volume
-##
 #################################################################
 
 This directory contains examples to :
